@@ -1,4 +1,5 @@
 ﻿using System;
+using ConsoleGame.Options;
 
 namespace ConsoleGame.Activities
 {
@@ -77,26 +78,9 @@ namespace ConsoleGame.Activities
 
         private void AskIfContinue()
         {
-            while (true)
-            {
-                Console.WriteLine("=================================");
-                Console.WriteLine("もう一回ギャンブルしますか？");
-                Console.WriteLine("yes:1,no:0");
-                Console.WriteLine("=================================");
-                var correctOption = int.TryParse(Console.ReadLine(), out var option);
-                if (!correctOption || (option != 0 && option != 1))
-                {
-                    Console.WriteLine("選択肢の入力ミス");
-                    continue;
-                }
-                if (option == 0)
-                {
-                    IfPlayGame = false;
-                    return;
-                }
-                IfPlayGame = true;
-                return;
-            }
+            Console.WriteLine("=================================");
+            Console.WriteLine("もう一回ギャンブルしますか？");
+            IfPlayGame = YesNoOptions.GetYesOrNo();
         }
     }
 }

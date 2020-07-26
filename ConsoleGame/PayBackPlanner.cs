@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
+using ConsoleGame.Options;
 
 namespace ConsoleGame
 {
@@ -64,38 +65,14 @@ namespace ConsoleGame
         {
             if (condition.Cash <= 0) return;
 
-            while (true)
+            Console.WriteLine("手元にある現金から返済しますか？");
+
+            IfPayBack = YesNoOptions.GetYesOrNo();
+
+            if (!IfPayBack)
             {
-                Console.WriteLine("手元にある現金から返済しますか？");
-                Console.WriteLine("Yes:1, No:0");
-                var correctOption = int.TryParse(Console.ReadLine(), out var option);
-                if (!correctOption || (option != 0 && option != 1))
-                {
-                    Console.WriteLine("選択肢の入力ミス");
-                    continue;
-                }
-
-                if (option == 0)
-                {
-                    Console.WriteLine("返済しない");
-                    IfPayBack = false;
-                    return;
-                };
-                IfPayBack = true;
-                return;
+                Console.WriteLine("返済しない");
             }
-
-            //while (paybackOptions != 0 && paybackOptions != 1)
-            //{
-            //    paybackOptions = int.TryParse(Console.ReadLine(), out var option) ? option : -1;
-            //}
-
-            //if (paybackOptions == 0)
-            //{
-            //    Console.WriteLine("返済しない");
-            //    IfPayBack = false;
-            //    return;
-            //};
         }
 
         private void CheckIfAfforable(PayBackPlanner condition)
