@@ -73,11 +73,6 @@ namespace ConsoleGame
             Console.WriteLine("手元にある現金から返済しますか？");
 
             IfPayBack = YesNoOptions.GetYesOrNo();
-
-            if (!IfPayBack)
-            {
-                Console.WriteLine("返済しない");
-            }
         }
 
         private void CheckIfAfforable(PayBackPlanner condition)
@@ -121,7 +116,7 @@ namespace ConsoleGame
             condition.DebtToPay -= PayBackAmount;
             condition.DaysToDeadline -= 1;
 
-            Console.WriteLine($"{PayBackAmount}円を返済できました。");
+            Console.WriteLine($"{PayBackAmount}円を返済しました。");
             ShowLatestCondition(condition);
         }
     }

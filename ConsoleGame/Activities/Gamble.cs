@@ -25,9 +25,9 @@ namespace ConsoleGame.Activities
 
         protected override string RuleExplanation() => "abc";
 
-        private static string GameOption()
+        private string GetSelectedGame()
         {
-            Console.WriteLine("ゲームを選びなさい");
+            Console.WriteLine("ゲームをお選びください");
             Console.WriteLine();
 
             var cm = new OptionManager();
@@ -40,13 +40,13 @@ namespace ConsoleGame.Activities
 
             if (c == null) return null;
             var item = c.Extension;
-            Console.WriteLine($"{item.OptionName}を選択した");
+            //Console.WriteLine($"{item.OptionName}を選択した");
             return item.OptionName;
         }
 
-        public static Gamble ChooseGames()
+        public Gamble ChooseGames()
         {
-            return Gambles.GetValueOrDefault(GameOption());
+            return Gambles.GetValueOrDefault(GetSelectedGame());
         }
 
         //一回のゲーム
@@ -54,7 +54,7 @@ namespace ConsoleGame.Activities
         {
             if (condition.Cash <= 0)
             {
-                Console.WriteLine("手元には現金がないため、ギャンブルはできない。");
+                Console.WriteLine("手元には現金が足りないため、ギャンブルができない。");
                 return;
             }
 
@@ -66,6 +66,7 @@ namespace ConsoleGame.Activities
                 game.GetLatestCondition(condition);
             }
             Console.WriteLine("ゲーム終了");
+            Console.Clear();
         }
     }
 }

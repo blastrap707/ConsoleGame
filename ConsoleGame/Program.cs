@@ -9,40 +9,47 @@ using ConsoleGame.Relationships;
 
 namespace ConsoleGame
 {
-    //500万の借金を返済するゲーム（一週間で）
-    //バーでアルバイト、ギャンブル
-    //一か月内で全額返済できなかったら、ホームレスになるか、手元に30万現金あれば、海外に逃亡し、一生母国に帰れなくなる。
-
-    internal class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(GameRules.Instruction);
+            Console.WriteLine(AppConst.Instruction);
 
             const int debt = 1000000;
             const int cash = 100000;
             const int dayLeft = 30;
-
-            var condition = new PayBackPlanner(debt, cash, dayLeft);
-            condition.ShowLatestCondition(condition);
-
-            while (condition.DaysToDeadline != 0 && condition.DebtToPay != 0)
+            const int escapeBudget = 100000;
+            try
             {
-                var action = AbstractAction.ChooseAction();
-                action.TakeAction(condition);
-            }
+                var condition = new PayBackPlanner(debt, cash, dayLeft);
+                condition.ShowLatestCondition(condition);
 
-            if (condition.DaysToDeadline == 0 && condition.DebtToPay > 0)
-            {
-                Console.WriteLine("期限内で返済をできませんでした。");
-                if (condition.Cash > 100000)
+                while (condition.DaysToDeadline != 0 && condition.DebtToPay != 0)
                 {
-                    Console.WriteLine("海外へ逃亡するか、ホームレスになるか？");
+                    var action = AbstractAction.ChooseAction();
+                    action.TakeAction(condition);
+                }
+
+                if (condition.DaysToDeadline == 0 && condition.DebtToPay > 0)
+                {
+                    Console.WriteLine("期限内で返済をできませんでした。");
+                    if (condition.Cash >= escapeBudget)
+                    {
+                        Console.WriteLine($"残りの{condition.Cash}円を使っちゃって、海外へ逃亡しよう！");
+                        return;
+                    }
+
+                    Console.WriteLine("Game Over");
+                }
+                else if (condition.DaysToDeadline > 0 && condition.DebtToPay == 0)
+                {
+                    Console.WriteLine("期限内で返済することができました。。おめでとうございます！");
                 }
             }
-            else if (condition.DaysToDeadline > 0 && condition.DebtToPay == 0)
+            catch (Exception e)
             {
-                Console.WriteLine("期限内で返済することができました。。おめでとうございます！");
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
     }

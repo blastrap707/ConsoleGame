@@ -6,8 +6,6 @@ namespace ConsoleGame.Relationships
     //一人の友人関係を示すクラス
     public class Friend : Connections
     {
-        //友達に嫌われると、追い出されるから、好感度をアップする
-        // if 好感度
         public Friend()
         {
         }
@@ -18,39 +16,36 @@ namespace ConsoleGame.Relationships
 
         public override int TotalBorrowing { get; set; }
 
+        private readonly int TotalAfforable = 300000;
+
         public override int OnetimeLimit { get; set; }
 
-        public override bool CanLend => CheckIfLend();
+        public override bool CanLend => CheckIfBorrable();
 
-        private bool CheckIfLend()
+        private bool CheckIfBorrable()
         {
             if (Borrow > OnetimeLimit)
             {
-                Console.WriteLine("向こうの一回で貸せる金額を超えちゃっている");
+                Console.WriteLine("借りてくれなかった。");
+                Console.WriteLine("金額が大きすぎたかも？");
                 return false;
             }
             if (Likes <= 0)
             {
-                Console.WriteLine("もうこの人から嫌われている");
+                Console.WriteLine("借りてくれなかった。");
+                Console.WriteLine("この人に嫌われているかも？");
                 return false;
             }
 
-            if (TotalBorrowing + Borrow > 300000)
+            if (TotalBorrowing + Borrow > TotalAfforable)
             {
-                Console.WriteLine("もうこの人から借りすぎている");
+                Console.WriteLine("借りてくれなかった。");
+                Console.WriteLine("借りすぎているかも？");
                 return false;
             }
-
             return true;
         }
 
         public override string FriendName { get; set; }
-
-        public string Relationship { get; set; }
-
-        public bool HasMarried { get; set; }
-
-        public bool HasChild { get; set; }
-        public int Income { get; set; }
     }
 }

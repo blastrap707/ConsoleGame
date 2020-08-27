@@ -37,16 +37,15 @@ namespace ConsoleGame.Activities
 
                 if (!friend.CanLend)
                 {
-                    Console.WriteLine("だから、借りることができません。");
+                    Console.WriteLine("借りることができなかった。");
                     Earnings = 0;
                     return;
                 }
 
-                Console.WriteLine($"友人から{friend.Borrow}円をいただけました。");
+                Console.WriteLine($"友人から{friend.Borrow}円を借りられた。");
                 friend.Likes -= 1;
                 friend.TotalBorrowing += friend.Borrow;
 
-                Console.WriteLine($"{friend.FriendName}さんのLikesは、{friend.Likes}");
                 Earnings = friend.Borrow;
                 return;
             }

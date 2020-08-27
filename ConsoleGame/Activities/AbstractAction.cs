@@ -10,12 +10,9 @@ namespace ConsoleGame.Activities
     public abstract class AbstractAction
     {
         private static readonly AbstractAction[] Activities = {
-            new WorkPartTime(),
             new Beg(),
             new Gamble(),
         };
-
-        public static List<Friend> GetFriends { get; set; }
 
         private static string OptionUi()
         {
@@ -28,12 +25,9 @@ namespace ConsoleGame.Activities
                 Activities.Select(e => new Option<AbstractAction>($"{e.OptionName}", e)).ToList()
             );
 
-            Console.WriteLine($"{c?.Caption ?? "キャンセル"} が選択されました");
-
             if (c != null)
             {
                 var item = c.Extension;
-                Console.WriteLine($"{item.OptionName}を選択した");
                 return item.OptionName;
             }
             return null;
@@ -53,7 +47,6 @@ namespace ConsoleGame.Activities
             var latestCondition = new PayBackPlanner();
             latestCondition.ShowLatestCondition(condition);
             latestCondition.PayBack(condition);
-            //PayBackPlanner.GetPresentCondition(condition);
         }
 
         protected abstract void GetLatestCondition(PayBackPlanner condition);

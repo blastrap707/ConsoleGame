@@ -4,8 +4,8 @@ using System.Text;
 
 namespace ConsoleGame.Activities
 {
-    //ほかに面白いギャンブルを思いつかなかったから
     internal class Game2 : Gamble
     {
+        protected override string OptionName => "思いつかないから";
     }
 }

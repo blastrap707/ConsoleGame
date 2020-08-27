@@ -8,13 +8,12 @@ using ConsoleGame.Activities;
 using ConsoleGame.Options;
 using ConsoleGame.Relationships;
 
-//人間関係を管理するクラス
+//人間関係を示すクラス
 
 namespace ConsoleGame
 {
     public class Connections
     {
-        //このクラスが管理する5人の友人
         private static readonly Connections[] Friends =
         {
             new Friend(){FriendName = "aさん",Likes = 10,OnetimeLimit=100000,TotalBorrowing=0},
@@ -32,11 +31,6 @@ namespace ConsoleGame
 
         public virtual int Likes { get; set; }
 
-        //public bool HasMarried { get; set; }
-
-        //public bool HasChild { get; set; }
-        //public int Income { get; set; }
-
         public virtual bool CanLend { get; set; }
 
         private static Dictionary<string, Connections> People => Friends
@@ -44,10 +38,10 @@ namespace ConsoleGame
 
         public static Connections ChooseFriends()
         {
-            return People.GetValueOrDefault(FriendOption());
+            return People.GetValueOrDefault(GetSelectedFriend());
         }
 
-        private static string FriendOption()
+        private static string GetSelectedFriend()
         {
             Console.WriteLine("誰から借りますか？");
             Console.WriteLine();

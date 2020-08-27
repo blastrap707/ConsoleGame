@@ -27,12 +27,13 @@ namespace ConsoleGame.Activities
 
         private void BuyLottery()
         {
+            Console.Clear();
             var time = 0;
             var r1 = new Random();
             var answer = r1.Next(1, 101);
             while (time < Limitation)
             {
-                Console.WriteLine("0~100の整数を一つ入力してください。");
+                Console.WriteLine("1~100の整数を一つ入力してください。");
                 Console.WriteLine("=>");
                 var correctInput = int.TryParse(Console.ReadLine(), out var input);
                 if (!correctInput || input <= 0 || input > 100)
