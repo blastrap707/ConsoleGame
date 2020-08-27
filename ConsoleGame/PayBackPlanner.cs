@@ -37,6 +37,11 @@ namespace ConsoleGame
 
         private void AdjustShownItems(PayBackPlanner condition)
         {
+            if (condition.DaysToDeadline == 30)
+            {
+                condition.HoursLeft = 0;
+                return;
+            }
             if (condition.Cash < 0)
             {
                 condition.DebtToPay -= condition.Cash;
@@ -57,7 +62,7 @@ namespace ConsoleGame
             Console.WriteLine("現時点の返済進捗状況");
             Console.WriteLine($"手元の現金:{condition.Cash}円\r\n" +
                                                $"残りの返済金額:{condition.DebtToPay}円\r\n" +
-                                               $"返済期限日まではあと：{condition.DaysToDeadline - 1}日 {condition.HoursLeft} 時間");
+                                               $"返済期限日まではあと：{condition.DaysToDeadline }日 {condition.HoursLeft} 時間");
             Console.WriteLine("============================");
         }
 

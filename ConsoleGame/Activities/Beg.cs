@@ -13,6 +13,7 @@ namespace ConsoleGame.Activities
 
         protected override void GetLatestCondition(PayBackPlanner condition)
         {
+            Console.Clear();
             Borrow();
             condition.Cash += Earnings;
             condition.HoursLeft -= TimeCost;
@@ -24,6 +25,7 @@ namespace ConsoleGame.Activities
 
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("借りたい金額を入力してください。");
                 friend.Borrow = int.TryParse(Console.ReadLine(), out var num) ? num : 0;
 
